@@ -1,0 +1,49 @@
+.todos__single {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 29.5%;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 15px;
+  background: linear-gradient(
+    127deg,
+    rgba(255, 237, 0, 1) 22%,
+    rgba(201, 187, 0, 1) 100%
+  );
+}
+
+.todos__single--text {
+  flex: 1;
+  padding: 1px;
+  border: none;
+  font-size: 20px;
+}
+
+.todos__single--text:focus {
+  outline: none;
+}
+
+.todos__single__icons {
+  display: flex;
+  width: 40%;
+  justify-content: space-evenly;
+}
+
+.icon {
+  margin-left: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .input {
+    width: 95%;
+  }
+  .todos {
+    width: 95%;
+  }
+  .todos__single {
+    width: 100%;
+  }
+}
