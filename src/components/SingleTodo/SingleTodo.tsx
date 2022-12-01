@@ -11,12 +11,13 @@ import { MdDone } from "react-icons/md";
 import { Todo } from "../../model/model";
 
 interface Props {
+  index: number;
   todo: Todo;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const SingleTodo = ({ todo, todos, setTodos }: Props) => {
+const SingleTodo = ({ todo, todos, setTodos, index }: Props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodoText, setEditTodoText] = useState<string>(todo.todo);
   const inputRef = useRef<HTMLInputElement>(null);

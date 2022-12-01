@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 
+//DND
+import { DragDropContext } from "react-beautiful-dnd";
+
 //TS model
 import { Todo } from "./model/model";
 
@@ -25,16 +28,18 @@ const App: React.FC = () => {
   console.log(todos);
 
   return (
-    <div className="App">
-      <span className="heading">Taskify</span>
-      <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        completedTodos={completedTodos}
-        setCompletedTodos={setCompletedTodos}
-      />
-    </div>
+    <DragDropContext onDragEnd={() => {}}>
+      <div className="App">
+        <span className="heading">Taskify</span>
+        <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+        <TodoList
+          todos={todos}
+          setTodos={setTodos}
+          completedTodos={completedTodos}
+          setCompletedTodos={setCompletedTodos}
+        />
+      </div>
+    </DragDropContext>
   );
 };
 
