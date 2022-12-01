@@ -44,6 +44,7 @@ export const TodoList: React.FC<Props> = ({
                 key={todo.id}
               />
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
@@ -64,6 +65,7 @@ export const TodoList: React.FC<Props> = ({
                 key={todo.id}
               />
             ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
