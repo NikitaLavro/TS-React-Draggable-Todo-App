@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 //Styles
 import "./styles.css";
@@ -17,6 +17,10 @@ interface Props {
 }
 
 const SingleTodo = ({ todo, todos, setTodos }: Props) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editTodoText, setEditTodoText] = useState<string>(todo.todo);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleDone = (id: number) => {
     setTodos(
       todos.map((todo) =>
@@ -25,18 +29,50 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
     );
   };
 
+  const handleDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const handleEdit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+    setTodos((todo) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, todo: editTodoText } : todo
+      )
+    );
+    setEdit(false);
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
+
   return (
-    <form className="todos__single" onClick={(e) => console.log(e.target)}>
-      {todo.isDone ? (
+    <form className="todos__single" onSubmit={(e) => handleEdit(e, todo.id)}>
+      {edit ? (
+        <input
+          ref={inputRef}
+          value={editTodoText}
+          onChange={(e) => setEditTodoText(e.target.value)}
+          className="todos__single--text"
+        />
+      ) : todo.isDone ? (
         <s className="todos__single--text">{todo.todo}</s>
       ) : (
         <span className="todos__single--text">{todo.todo}</span>
       )}
+
       <div className="todos__single__icons">
         <span className="icon">
-          <AiFillEdit />
+          <AiFillEdit
+            onClick={() => {
+              if (!edit && !todo.isDone) {
+                setEdit(!edit);
+              }
+            }}
+          />
         </span>
-        <span className="icon">
+        <span className="icon" onClick={() => handleDelete(todo.id)}>
           <AiFillDelete />
         </span>
         <span className="icon" onClick={() => handleDone(todo.id)}>
