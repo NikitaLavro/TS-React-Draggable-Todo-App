@@ -11,6 +11,7 @@ import { TodoList } from "./components/TodoList/TodoList";
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,12 @@ const App: React.FC = () => {
     <div className="App">
       <span className="heading">Taskify</span>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        completedTodos={completedTodos}
+        setCompletedTodos={setCompletedTodos}
+      />
     </div>
   );
 };
